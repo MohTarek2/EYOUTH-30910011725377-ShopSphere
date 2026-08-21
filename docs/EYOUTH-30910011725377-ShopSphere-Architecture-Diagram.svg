@@ -1,0 +1,94 @@
+<svg viewBox="0 0 1000 620" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1000" height="620" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="500" y="45" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="bold">
+    ShopSphere - Production Architecture (Task 1 Deployment)
+  </text>
+  <text x="500" y="70" text-anchor="middle" fill="#94a3b8" font-size="13">
+    EYOUTH-30910011725377-ShopSphere
+  </text>
+
+  <!-- User / Client -->
+  <g>
+    <rect x="60" y="260" width="150" height="90" rx="12" fill="#1e293b" stroke="#64748b" stroke-width="1.5"/>
+    <text x="135" y="298" text-anchor="middle" fill="#f8fafc" font-size="15" font-weight="bold">User</text>
+    <text x="135" y="320" text-anchor="middle" fill="#94a3b8" font-size="12">Web Browser</text>
+  </g>
+
+  <!-- Frontend -->
+  <g>
+    <rect x="330" y="120" width="260" height="150" rx="12" fill="#0b3b2e" stroke="#22c55e" stroke-width="2"/>
+    <text x="460" y="152" text-anchor="middle" fill="#f0fdf4" font-size="16" font-weight="bold">Frontend</text>
+    <text x="460" y="174" text-anchor="middle" fill="#86efac" font-size="12">React + Vite (Production Build)</text>
+    <text x="460" y="196" text-anchor="middle" fill="#86efac" font-size="12">Hosted on Vercel</text>
+    <text x="460" y="222" text-anchor="middle" fill="#d1fae5" font-size="11">eyouth-30910011725377-</text>
+    <text x="460" y="238" text-anchor="middle" fill="#d1fae5" font-size="11">shop-sphere-r.vercel.app</text>
+    <text x="460" y="258" text-anchor="middle" fill="#4ade80" font-size="11">(Public URL, served over HTTPS)</text>
+  </g>
+
+  <!-- Backend -->
+  <g>
+    <rect x="330" y="340" width="260" height="170" rx="12" fill="#1e2a4a" stroke="#3b82f6" stroke-width="2"/>
+    <text x="460" y="372" text-anchor="middle" fill="#eff6ff" font-size="16" font-weight="bold">Backend API</text>
+    <text x="460" y="394" text-anchor="middle" fill="#93c5fd" font-size="12">Node.js + Express (Serverless Function)</text>
+    <text x="460" y="414" text-anchor="middle" fill="#93c5fd" font-size="12">Hosted on Vercel</text>
+    <text x="460" y="438" text-anchor="middle" fill="#dbeafe" font-size="11">eyouth-30910011725377-</text>
+    <text x="460" y="454" text-anchor="middle" fill="#dbeafe" font-size="11">shop-sphere-nine.vercel.app</text>
+    <text x="460" y="476" text-anchor="middle" fill="#60a5fa" font-size="11">Helmet + CORS + Rate Limiting active</text>
+    <text x="460" y="494" text-anchor="middle" fill="#60a5fa" font-size="11">/api/health endpoint (monitored)</text>
+  </g>
+
+  <!-- Database -->
+  <g>
+    <rect x="700" y="340" width="240" height="150" rx="12" fill="#3b2a0e" stroke="#f59e0b" stroke-width="2"/>
+    <text x="820" y="372" text-anchor="middle" fill="#fffbeb" font-size="16" font-weight="bold">Database</text>
+    <text x="820" y="394" text-anchor="middle" fill="#fcd34d" font-size="12">PostgreSQL</text>
+    <text x="820" y="414" text-anchor="middle" fill="#fcd34d" font-size="12">Hosted on Supabase</text>
+    <text x="820" y="438" text-anchor="middle" fill="#fef3c7" font-size="11">Connection pooling (port 6543)</text>
+    <text x="820" y="454" text-anchor="middle" fill="#fef3c7" font-size="11">Direct connection (port 5432)</text>
+    <text x="820" y="474" text-anchor="middle" fill="#fbbf24" font-size="11">No local / dev database used</text>
+  </g>
+
+  <!-- Monitoring -->
+  <g>
+    <rect x="700" y="120" width="240" height="110" rx="12" fill="#3a1420" stroke="#f43f5e" stroke-width="2"/>
+    <text x="820" y="152" text-anchor="middle" fill="#fff1f2" font-size="16" font-weight="bold">Monitoring</text>
+    <text x="820" y="174" text-anchor="middle" fill="#fda4af" font-size="12">UptimeRobot</text>
+    <text x="820" y="196" text-anchor="middle" fill="#fecdd3" font-size="11">Polls /api/health every 5 min</text>
+    <text x="820" y="214" text-anchor="middle" fill="#fb7185" font-size="11">Reports uptime status</text>
+  </g>
+
+  <!-- Arrows / Traffic paths -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e2e8f0"/>
+    </marker>
+  </defs>
+
+  <!-- User -> Frontend (HTTPS) -->
+  <line x1="210" y1="290" x2="325" y2="210" stroke="#e2e8f0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="230" y="235" fill="#e2e8f0" font-size="12">HTTPS</text>
+
+  <!-- Frontend -> Backend (REST / Axios) -->
+  <line x1="460" y1="270" x2="460" y2="336" stroke="#e2e8f0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="470" y="305" fill="#e2e8f0" font-size="12">REST API calls (HTTPS)</text>
+
+  <!-- Backend -> Database -->
+  <line x1="594" y1="440" x2="696" y2="420" stroke="#e2e8f0" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="600" y="410" fill="#e2e8f0" font-size="12">Prisma / PostgreSQL protocol</text>
+
+  <!-- Monitoring -> Backend health endpoint -->
+  <line x1="750" y1="230" x2="590" y2="345" stroke="#fb7185" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+  <text x="605" y="300" fill="#fda4af" font-size="12">GET /api/health</text>
+
+  <!-- Legend -->
+  <g transform="translate(60,540)">
+    <rect x="0" y="0" width="880" height="60" rx="10" fill="#111827" stroke="#334155"/>
+    <text x="20" y="25" fill="#94a3b8" font-size="12">Traffic path: User → Frontend (Vercel) → Backend API (Vercel Serverless) → Database (Supabase PostgreSQL)</text>
+    <text x="20" y="45" fill="#94a3b8" font-size="12">All public traffic is served over HTTPS. Secrets (DATABASE_URL, DIRECT_URL, JWT_SECRET) are stored as Vercel environment variables, not in the repository.</text>
+  </g>
+
+</svg>
