@@ -1,9 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import "./../styles/Navbar.css";
 
 function Navbar() {
 
-  const token = localStorage.getItem("token");
+  const { token, logout } = useContext(AuthContext);
 
   return (
 
@@ -32,10 +34,7 @@ function Navbar() {
         {token && (
           <button
             className="logout-btn"
-            onClick={()=>{
-              localStorage.removeItem("token");
-              window.location.reload();
-            }}
+            onClick={logout}
           >
             Logout
           </button>
